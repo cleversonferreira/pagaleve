@@ -1,16 +1,26 @@
 version: '3.7'
 
 services:
-  pagleve-server:
+  server:
     build:
       context: .
       dockerfile: Dockerfile
       target: base
     volumes:
       - ./src:/home/node/app/src
-    container_name: pagleve-server
+    container_name: pagaleve-server
     expose:
       - '3000'
     ports:
       - '3000:3000'
     command: yarn dev:server
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/mongo:/data/db
+    container_name: pagaleve-mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=pagaleve
+      - MONGO_INITDB_ROOT_PASSWORD=pagaleve
