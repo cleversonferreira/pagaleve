@@ -1,0 +1,193 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pagaleve API",
+        "description": "Cleverson code test API",
+        "contact": {
+            "email": "cleverson_reisferreira@hotmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Development API"
+        },
+        {
+            "url": "http://localhost:3000",
+            "description": "Staging API"
+        },
+        {
+            "url": "http://localhost:3000",
+            "description": "Production API"
+        }
+    ],
+    "paths": {
+        "/customers": {
+            "post": {
+                "summary": "Create Customer",
+                "description": "Route to create new customer",
+                "tag": ["Customers"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            },
+                            "examples": {
+                                "customer": {
+                                    "value": {
+                                        "name": "Cleverson Franco",
+                                        "email": "cleverson_reisferreira@hotmail.com",
+                                        "password": "*****"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Customer created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on create Customer"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get All Customers",
+                "description": "Route get all customer",
+                "tag": ["Customers"],
+                "responses": {
+                    "200": {
+                        "description": "List of all customers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on get all Customers"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Customers",
+                "description": "Route to update customer",
+                "tag": ["Customers"],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "query",
+                        "description": "Customer UUID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update customer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on update Customer"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Customer",
+                "description": "Route to delete customer",
+                "tag": ["Customers"],
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "query",
+                        "description": "Customer UUID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete customers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error on remove Customer"
+                    }
+                }
+            }
+        },
+        "/customers/search": {
+            "get": {
+                "summary": "Search Customers",
+                "description": "Route to search customer by params",
+                "tag": ["Customers"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Customer name"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Customer email"
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

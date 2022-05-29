@@ -5,6 +5,9 @@
 docker compose up
 ```
 
+## Docs
+http://localhost:3000/docs
+
 # Routes
 ### Create customer
 ```
