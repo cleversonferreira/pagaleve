@@ -17,7 +17,7 @@ export class CreateCustomerController {
 
       logger.info('customer created with success');
       return res.status(201).send(customer);
-    } catch (err) {
+    } catch (err: any) {
       logger.error(err);
       return res.status(400).json(err.message);
     }
