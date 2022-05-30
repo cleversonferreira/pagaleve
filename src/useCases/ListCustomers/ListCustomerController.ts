@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ListCustomerUseCase } from './ListCustomerUseCase';
+const logger = require('../../logger');
 
 export class ListCustomerController {
   constructor(private listCustomerUseCase: ListCustomerUseCase) {}
@@ -8,8 +9,10 @@ export class ListCustomerController {
     try {
       const customers = await this.listCustomerUseCase.execute();
 
+      logger.info('customers listed with success');
       return res.status(200).send(customers);
     } catch (err: any) {
+      logger.error(err);
       return res.status(400).json(err.message);
     }
   }
